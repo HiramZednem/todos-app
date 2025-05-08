@@ -1,15 +1,23 @@
 
+import todoStore from '../store/todo.store';
 import html from './app.html?raw'
+import { renderTodo } from './usecases';
+
 /**
  * 
  * @param {String} elementId 
  */
 export const App = ( elementId ) => {
 
+    const loadTodos = () => {
+        const todos = todoStore.getTodos( todoStore.getCurrentFilter() );
+        renderTodo('.todo-list', todos)
+    }
 
     (()=>{
         const app = document.createElement('div');
         app.innerHTML = html;
         document.querySelector(elementId).append( app );
+        loadTodos();
     })();
 }
