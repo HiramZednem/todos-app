@@ -9,9 +9,14 @@ import { renderTodo } from './usecases';
  */
 export const App = ( elementId ) => {
 
+    const ElementsIds = {
+        TodoList: '.todo-list',
+        TodoInput: '#new-todo-input'
+    }
+
     const loadTodos = () => {
         const todos = todoStore.getTodos( todoStore.getCurrentFilter() );
-        renderTodo('.todo-list', todos)
+        renderTodo(ElementsIds.TodoList, todos)
     }
 
     (()=>{
@@ -20,4 +25,9 @@ export const App = ( elementId ) => {
         document.querySelector(elementId).append( app );
         loadTodos();
     })();
+
+    // Referencias HTML
+    const todoInput = document.querySelector(ElementsIds.TodoInput);
+    
+    // EventListeners
 }
