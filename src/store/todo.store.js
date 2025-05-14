@@ -18,13 +18,22 @@ const state = {
 }
 
 const initStore = () => {
-    console.log(state);
+    loadStore();
     console.log('InitStore 🐧')
     setFilter();
 }
 
 const loadStore = () => {
-    throw new Error('Not implemented')
+    const storedState = localStorage.getItem('state');
+    if (!storedState) return;
+
+    const { todos = [], filter = Filters.All } = JSON.parse(storedState);
+    state.todos = todos.map(todo => new Todo(todo.description, todo.id, todo.done));
+    state.filter = filter;
+}
+
+export const saveStateToLocalStorage = () => {
+    localStorage.setItem('state', JSON.stringify(state))
 }
 
 const getTodos = ( filter = Filters.All ) => {
@@ -47,6 +56,8 @@ const getTodos = ( filter = Filters.All ) => {
 const addTodo = ( description ) => {
     if (!description) throw new Error('description is required');
     state.todos.push( new Todo(description) );
+
+    saveStateToLocalStorage();
 }
 
 const toogleTodo = ( idTodo ) => {
@@ -57,20 +68,24 @@ const toogleTodo = ( idTodo ) => {
         }
         return todo
     });
+    saveStateToLocalStorage();
 }
 
 const deleteTodo = ( idTodo ) => {
     validateId(idTodo);
     state.todos = state.todos.filter(todo => todo.id !== idTodo)
+    saveStateToLocalStorage();
 };
 
 const deleteCompleted = () => {
     state.todos = state.todos.filter(todo => !todo.done);
+    saveStateToLocalStorage();
 }
 
 const setFilter = ( filter = Filters.All ) => {
     if( !Object.values(Filters).includes(filter) ) throw new Error(`filter: ${filter} not valid`);
     state.filter = filter;
+    saveStateToLocalStorage();
 }
 
 const getCurrentFilter = () => {
