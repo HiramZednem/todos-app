@@ -11,7 +11,8 @@ export const App = ( elementId ) => {
 
     const ElementsIds = {
         TodoList: '.todo-list',
-        TodoInput: '#new-todo-input'
+        TodoInput: '#new-todo-input',
+        ClearCompleted: '.clear-completed'
     }
 
     const loadTodos = () => {
@@ -29,6 +30,7 @@ export const App = ( elementId ) => {
     // Referencias HTML
     const todoInput = document.querySelector(ElementsIds.TodoInput);
     const todoListUL = document.querySelector(ElementsIds.TodoList);
+    const clearCompleted = document.querySelector(ElementsIds.ClearCompleted)
     
     // EventListeners
     todoInput.addEventListener('keyup', (evt) => {
@@ -54,4 +56,9 @@ export const App = ( elementId ) => {
         todoStore.deleteTodo(element.getAttribute('data-id'));
         loadTodos();
     });
+    
+    clearCompleted.addEventListener('click', (event)=> {
+        todoStore.deleteCompleted();
+        loadTodos();
+    })
 }
