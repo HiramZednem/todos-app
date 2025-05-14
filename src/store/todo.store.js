@@ -1,7 +1,7 @@
 import { Todo } from "../todos/models/todo.model";
 import { validate } from "uuid";
 
-const Filters = {
+export const Filters = {
     All: 'all',
     Completed: 'completed',
     Pending: 'pending'
@@ -15,7 +15,7 @@ const state = {
 const initStore = () => {
     loadStore();
     console.log('InitStore 🐧')
-    setFilter();
+    setFilter( getCurrentFilter() );
 }
 
 const loadStore = () => {
@@ -39,8 +39,6 @@ const getTodos = ( filter = Filters.All ) => {
             return state.todos.filter(todo => todo.done);
         case Filters.Pending:
             return state.todos.filter(todo => !todo.done);
-        default:
-            throw new Error(`Option: ${filter} not valid`)
     }
 }
 
