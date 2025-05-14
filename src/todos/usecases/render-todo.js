@@ -14,7 +14,7 @@ export const renderTodo = ( elementId, todoList ) => {
     if (!element) element = document.querySelector(elementId); 
     if (!element) throw new Error(`element with id: ${elementId} not found`) 
     
-    element.innerHtml = '';
+   element.innerHTML = ''
    todoList.forEach(todo => { 
         const todoElement = createTodo(todo);
         element .append(todoElement); 

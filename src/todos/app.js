@@ -30,4 +30,12 @@ export const App = ( elementId ) => {
     const todoInput = document.querySelector(ElementsIds.TodoInput);
     
     // EventListeners
+    todoInput.addEventListener('keyup', (evt) => {
+        if(evt.keyCode !== 13) return;
+        if(evt.target.value.trim().length === 0) return;
+
+        todoStore.addTodo(evt.target.value);
+        evt.target.value = '';
+        loadTodos();
+    })
 }
