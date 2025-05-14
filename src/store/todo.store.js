@@ -55,6 +55,7 @@ const toogleTodo = ( idTodo ) => {
         if (todo.id === idTodo) {
             todo.done = !todo.done
         }
+        return todo
     });
 }
 
@@ -77,6 +78,7 @@ const getCurrentFilter = () => {
 }
 
 const validateId = (id) => {
+    console.log(id)
     if (!id) throw new Error('id is required');
     if (!validate(id)) throw new Error(`id: ${id} not valid`);
 }
