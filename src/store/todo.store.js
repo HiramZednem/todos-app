@@ -22,8 +22,8 @@ const loadStore = () => {
     const storedState = localStorage.getItem('state');
     if (!storedState) return;
 
-    const { todos = [], filter = Filters.All } = JSON.parse(storedState);
-    state.todos = todos.map(todo => new Todo(todo.description, todo.id, todo.done));
+    const { todos = [], filter } = JSON.parse(storedState);
+    state.todos = todos;
     state.filter = filter;
 }
 
