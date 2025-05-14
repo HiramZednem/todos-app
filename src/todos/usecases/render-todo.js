@@ -7,7 +7,7 @@ let element;
  * @param {String} elementId el id del elemento en donde se desea renderizar los todos 
  * @param {Todo} todoList 
  */
-export const renderTodo = ( elementId, todoList ) => {
+export const renderTodos = ( elementId, todoList ) => {
     if(!elementId) throw new Error('elementId required');
     if(!todoList) throw new Error('todoList required') 
        

@@ -1,2 +1,3 @@
 export { createTodo } from "./create-todo";
-export { renderTodo } from "./render-todo";
+export { renderTodos } from "./render-todo";
+export { countingPending } from "./counting-pending";
