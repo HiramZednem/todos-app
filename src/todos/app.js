@@ -38,12 +38,20 @@ export const App = ( elementId ) => {
         todoStore.addTodo(evt.target.value);
         evt.target.value = '';
         loadTodos();
-    })
+    });
 
     todoListUL.addEventListener('click', (event) => {
         const element = event.target.closest('[data-id]');
-        
+
         todoStore.toogleTodo(element.getAttribute('data-id'));
         loadTodos();
-    })
+    });
+
+     todoListUL.addEventListener('click', (event) => {
+        if (event.target.getAttribute('class') !== 'destroy') return;
+        
+        const element = event.target.closest('[data-id]');
+        todoStore.deleteTodo(element.getAttribute('data-id'));
+        loadTodos();
+    });
 }
